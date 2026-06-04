@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>识字小报生成器</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 错误 Toast -->
+  <div id="error-toast" class="hidden">
+    <span id="error-message"></span>
+    <button id="error-dismiss">&times;</button>
+  </div>
+
+  <!-- 全局加载指示器 -->
+  <div id="global-spinner" class="hidden">
+    <div class="spinner-icon"></div>
+    <span id="spinner-text">处理中...</span>
+  </div>
+
+  <div class="container">
+
+    <!-- 第一区：输入主题 -->
+    <section id="section-input">
+      <h1>识字小报生成器</h1>
+
+      <div class="input-group">
+        <label for="theme-input">主题 / 场景</label>
+        <input type="text" id="theme-input" placeholder="例如：超市、医院、公园、动物园">
+        <span class="hint" id="theme-hint"></span>
+      </div>
+
+      <div class="input-group">
+        <label for="title-input">小报标题</label>
+        <input type="text" id="title-input" placeholder="例如：《走进超市》">
+      </div>
+
+      <div class="config-row">
+        <label for="image-api-key">图片生成 API Key <span class="hint">(kie.ai)</span></label>
+        <input type="password" id="image-api-key" placeholder="请输入 kie.ai 的 API Key">
+        <button id="settings-save" class="primary small-btn">保存</button>
+      </div>
+
+      <div class="button-group">
+        <button id="btn-gen-vocab" class="primary" disabled>生成词汇</button>
+      </div>
+    </section>
+
+    <!-- 第二区：词汇预览 + 提示词编辑 -->
+    <section id="section-prompt" class="hidden">
+      <h2>词汇预览与提示词编辑</h2>
+
+      <div id="vocab-summary"></div>
+
+      <label for="prompt-editor" style="display:block; font-size:13px; color:var(--text-light); margin-bottom:6px;">
+        以下为组装好的提示词，可直接编辑后再生成图片：
+      </label>
+      <textarea id="prompt-editor" rows="20"></textarea>
+
+      <div class="button-group">
+        <button id="btn-regen-vocab" class="secondary">重新生成词汇</button>
+        <button id="btn-gen-image" class="primary">生成图片</button>
+      </div>
+    </section>
+
+    <!-- 第三区：图片结果 -->
+    <section id="section-result" class="hidden">
+      <h2>生成结果</h2>
+
+      <div id="progress-area">
+        <div class="progress-spinner"></div>
+        <span id="progress-text">提交任务中...</span>
+        <span id="elapsed-time"></span>
+      </div>
+
+      <div id="image-area" class="hidden">
+        <img id="result-image" alt="识字小报">
+        <div class="button-group">
+          <a id="download-btn" href="#" target="_blank" download="识字小报.png">下载图片</a>
+          <button id="btn-new-gen" class="secondary">重新生成</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 按依赖顺序加载 JS 模块 -->
+  <script src="js/utils.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/prompt.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
